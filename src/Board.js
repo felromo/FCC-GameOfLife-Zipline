@@ -16,6 +16,7 @@ export default class Board extends React.Component {
         I am a board
         <p>My size is: {this.props.size}</p>
         <p>My speed is: {this.props.speed}</p>
+        <Cell />
       </div>
     );
   }

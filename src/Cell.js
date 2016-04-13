@@ -7,7 +7,7 @@ export default class Cell extends React.Component {
 
   render() {
     return (
-      <div>I am a cell</div>
+      <div className="cell"></div>
     );
   }
 }
