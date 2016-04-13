@@ -3,6 +3,10 @@ import React from 'react';
 export default class Board extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      size: this.props.size,
+      speed: this.props.size
+    };
   }
 
   render() {
@@ -15,3 +19,8 @@ export default class Board extends React.Component {
     );
   }
 }
+
+Board.defaultProps = {
+  size: 'medium',
+  speed: 'medium'
+};

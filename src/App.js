@@ -9,7 +9,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Board size={'medium'} speed={'medium'}/>
+        <Board />
       </div>
     );
   }
