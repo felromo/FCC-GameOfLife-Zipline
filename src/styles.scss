@@ -1,6 +1,21 @@
 $tmp-background-color: #808080;
+$board-background-color: #fff;
+$cell-background-color: #000;
+$cell-height: 8px;
+$cell-width: 8px;
+
 
 body {
   background: $tmp-background-color;
+}
+
+.board {
+  background: $board-background-color;
+}
+
+.cell {
+  background: $cell-background-color;
+  height: $cell-height;
+  width: $cell-width;
 }
 
