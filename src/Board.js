@@ -1,4 +1,5 @@
 import React from 'react';
+import Cell from './Cell';
 
 export default class Board extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class Board extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="board">
         I am a board
         <p>My size is: {this.props.size}</p>
         <p>My speed is: {this.props.speed}</p>
