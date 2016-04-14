@@ -11,10 +11,14 @@ body {
 
 .board {
   background: $board-background-color;
+  height: 50 * $cell-height;
+  width: 70 * $cell-width;
 }
 
 .cell {
   background: $cell-background-color;
+  border: 1px solid $tmp-background-color;
+  display: inline-block;
   height: $cell-height;
   width: $cell-width;
 }

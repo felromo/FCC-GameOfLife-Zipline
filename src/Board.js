@@ -10,13 +10,29 @@ export default class Board extends React.Component {
     };
   }
 
+  populateBoardWithCells(row, col) {
+    // across
+    const across = col;
+    // down
+    const down = row;
+    // will be a two dimension array
+    let board = [];
+    for (let x = 0; x < across; x++) {
+      board.push([]);
+      for (let y = 0; y < down; y++) {
+        board[x].push(<Cell />);
+      }
+    }
+    return board;
+  }
+
   render() {
+    const board = this.populateBoardWithCells(70, 50);
     return (
       <div className="board">
-        I am a board
-        <p>My size is: {this.props.size}</p>
-        <p>My speed is: {this.props.speed}</p>
-        <Cell />
+        {
+          board
+        }
       </div>
     );
   }
