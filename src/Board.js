@@ -20,7 +20,7 @@ export default class Board extends React.Component {
     for (let x = 0; x < across; x++) {
       board.push([]);
       for (let y = 0; y < down; y++) {
-        board[x].push(<Cell />);
+        board[x].push(<Cell id={ x+ ',' +y }/>);
       }
     }
     return board;
