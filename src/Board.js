@@ -10,7 +10,23 @@ export default class Board extends React.Component {
     };
   }
 
-  populateBoardWithCells(row, col) {
+  populateBoardWithCells(size) {
+    let row = 0;
+    let col = 0;
+    switch (size) {
+      case 'small':
+      row = 50;
+      col = 30;
+      break;
+      case 'medium':
+      row = 70;
+      col = 50;
+      break;
+      case 'large':
+      row = 100;
+      col = 80;
+      break;
+    }
     // across
     const across = col;
     // down
@@ -27,9 +43,9 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const board = this.populateBoardWithCells(50, 70);
+    const board = this.populateBoardWithCells(this.props.size);
     return (
-      <div className="board board-md">
+      <div className="board board-sm">
         {
           board
         }
