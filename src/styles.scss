@@ -1,8 +1,9 @@
 $tmp-background-color: #808080;
 $board-background-color: #fff;
 $cell-background-color: #000;
-$cell-height: 8px;
-$cell-width: 8px;
+$cell-border-color: #808080;
+$cell-height: 10px;
+$cell-width: 10px;
 
 
 body {
@@ -17,9 +18,11 @@ body {
 
 .cell {
   background: $cell-background-color;
-  border: 1px solid $tmp-background-color;
+  border: 1px solid $cell-border-color;
+  box-sizing: border-box;
   display: inline-block;
   height: $cell-height;
+  margin: 0;
   width: $cell-width;
 }
 
