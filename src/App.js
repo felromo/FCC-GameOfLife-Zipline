@@ -1,6 +1,8 @@
 import React from 'react';
+import $ from 'jquery';
 import Board from './Board';
 import Store from './Store';
+import * as Actions from './Actions';
 require('./styles.scss');
 
 export default class App extends React.Component {
@@ -19,13 +21,18 @@ export default class App extends React.Component {
     });
   }
 
+  handleClick = (e) => {
+    const size = $(e.target).text();
+    Actions.changeSize(size);
+  }
+
   render() {
     return (
       <div>
         <Board size={this.state.size}/>
-        <button>small</button>
-        <button>medium</button>
-        <button>large</button>
+        <button onClick={this.handleClick}>small</button>
+        <button onClick={this.handleClick}>medium</button>
+        <button onClick={this.handleClick}>large</button>
       </div>
     );
   }
