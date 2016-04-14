@@ -42,10 +42,22 @@ export default class Board extends React.Component {
     return board;
   }
 
+  boardSize(size) {
+    switch (size) {
+      case 'small':
+        return ;
+        break;
+      case 'medium':
+        break;
+      case 'large':
+        break;
+    }
+  }
+
   render() {
     const board = this.populateBoardWithCells(this.props.size);
     return (
-      <div className="board board-sm">
+      <div className={"board board-" + this.props.size}>
         {
           board
         }

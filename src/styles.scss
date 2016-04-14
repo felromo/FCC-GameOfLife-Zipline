@@ -14,17 +14,17 @@ body {
   background: $board-background-color;
 }
 
-.board-sm {
+.board-small {
   height: 30 * $cell-height;
   width: 50 * $cell-width;
 }
 
-.board-md {
+.board-medium {
   height: 50 * $cell-height;
   width: 70 * $cell-width;
 }
 
-.board-lg {
+.board-large {
   height: 80 * $cell-height;
   width: 100 * $cell-width;
 }
