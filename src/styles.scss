@@ -12,8 +12,21 @@ body {
 
 .board {
   background: $board-background-color;
+}
+
+.board-sm {
+  height: 30 * $cell-height;
+  width: 50 * $cell-width;
+}
+
+.board-md {
   height: 50 * $cell-height;
   width: 70 * $cell-width;
+}
+
+.board-lg {
+  height: 80 * $cell-height;
+  width: 100 * $cell-width;
 }
 
 .cell {

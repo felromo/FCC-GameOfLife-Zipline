@@ -27,9 +27,9 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const board = this.populateBoardWithCells(70, 50);
+    const board = this.populateBoardWithCells(50, 70);
     return (
-      <div className="board">
+      <div className="board board-md">
         {
           board
         }
