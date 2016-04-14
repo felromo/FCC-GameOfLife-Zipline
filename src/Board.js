@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from './Cell';
+import Store from './Store';
 
 export default class Board extends React.Component {
   constructor(props) {
@@ -8,6 +9,17 @@ export default class Board extends React.Component {
       size: this.props.size,
       speed: this.props.size
     };
+    this.lifeCyclePID = null;
+  }
+
+  componentWillMount() {
+    // store listeners 
+    Store.on('start', () => {
+      this.startLifeCycle(1000);
+    });
+    Store.on('end', () => {
+      this.endLifeCycle();
+    });
   }
 
   populateBoardWithCells(size) {
@@ -54,8 +66,22 @@ export default class Board extends React.Component {
     }
   }
 
+  startLifeCycle = (speed) => {
+    let counter = 0;
+    this.lifeCyclePID = setInterval(() => {
+      console.log(counter);
+      counter++;
+    }, speed);
+  }
+
+  endLifeCycle = () => {
+    clearInterval(this.lifeCyclePID);
+  }
+
   render() {
     const board = this.populateBoardWithCells(this.props.size);
+    /* const runningPID = this.startLifeCycle(1000); */
+    this.startLifeCycle(1000);
     return (
       <div className={'board board-' + this.props.size}>
         {

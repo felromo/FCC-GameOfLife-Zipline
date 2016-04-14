@@ -9,7 +9,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      size: Store.getSize()
+      size: Store.getSize(),
+      running: Store.isRunning()
     };
   }
 
@@ -26,13 +27,22 @@ export default class App extends React.Component {
     Actions.changeSize(size);
   }
 
+  handleClickStart = () => {
+    Actions.start();
+  }
+  handleClickStop = () => {
+    Actions.stop();
+  }
+
   render() {
     return (
       <div>
-        <Board size={this.state.size}/>
+        <Board size={this.state.size} running={this.state.running}/>
         <button onClick={this.handleClick}>small</button>
         <button onClick={this.handleClick}>medium</button>
         <button onClick={this.handleClick}>large</button>
+        <button onClick={this.handleClickStart}>Start</button>
+        <button onClick={this.handleClickStop}>Stop</button>
       </div>
     );
   }

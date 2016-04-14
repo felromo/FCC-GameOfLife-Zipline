@@ -5,6 +5,7 @@ class Store extends EventEmitter {
   constructor() {
     super();
     this.size = 'medium';
+    this.running = true;
   }
 
   changeSize(size) {
@@ -12,14 +13,39 @@ class Store extends EventEmitter {
     this.emit('change-size');
   }
 
+  startLifeCycle() {
+    this.running = true;
+    this.emit('start');
+  }
+
+  endLifeCycle() {
+    this.running = false;
+    this.emit('end');
+  }
+
   getSize() {
     return this.size;
+  }
+
+  isRunning() {
+    return this.running;
   }
 
   handleActions(action) {
     switch(action.type) {
       case 'CHANGE_SIZE': {
         this.changeSize(action.size);
+        break;
+      }
+      case 'START': {
+        console.log('recieved the start action');
+        this.startLifeCycle();
+        break;
+      }
+      case 'STOP': {
+        console.log('recieved the stop action');
+        this.endLifeCycle();
+        break;
       }
     }
   }

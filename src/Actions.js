@@ -6,3 +6,15 @@ export function changeSize(size) {
     size: size
   });
 }
+
+export function start() {
+  dispatcher.dispatch({
+    type: 'START'
+  });
+}
+
+export function stop() {
+  dispatcher.dispatch({
+    type: 'STOP'
+  });
+}
