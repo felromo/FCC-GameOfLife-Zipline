@@ -6,6 +6,11 @@ class Store extends EventEmitter {
     this.size = 'medium';
   }
 
+  changeSize(size) {
+    this.size = size;
+    this.emit('change-size');
+  }
+
   getSize() {
     return this.size;
   }
