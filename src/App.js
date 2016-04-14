@@ -11,6 +11,14 @@ export default class App extends React.Component {
     };
   }
 
+  componentWillMount() {
+    Store.on('change-size', () => {
+      this.setState({
+        size: Store.getSize()
+      });
+    });
+  }
+
   render() {
     return (
       <div>
