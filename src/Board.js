@@ -22,6 +22,10 @@ export default class Board extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.startLifeCycle(1000);
+  }
+
   populateBoardWithCells(size) {
     let row = 0;
     let col = 0;
@@ -66,13 +70,18 @@ export default class Board extends React.Component {
     }
   }
 
+  checkForLife = () => {
+    console.log('I am checking for life');
+  }
+
   startLifeCycle = (speed) => {
     let counter = 0;
     // prevents previous PID's from being overwritten if user spam clicks 'start'
     if (this.lifeCyclePID === null) {
       this.lifeCyclePID = setInterval(() => {
-        console.log(counter);
-        counter++;
+        /* console.log(counter);
+           counter++; */
+        this.checkForLife();
       }, speed);
     }
   }
@@ -85,8 +94,6 @@ export default class Board extends React.Component {
 
   render() {
     const board = this.populateBoardWithCells(this.props.size);
-    /* const runningPID = this.startLifeCycle(1000); */
-    this.startLifeCycle(1000);
     return (
       <div className={'board board-' + this.props.size}>
         {
