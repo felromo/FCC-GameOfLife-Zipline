@@ -7,7 +7,7 @@ export default class Board extends React.Component {
     super(props);
     this.state = {
       size: this.props.size,
-      speed: this.props.size
+      speed: this.props.speed
     };
     this.lifeCyclePID = null;
   }
@@ -68,14 +68,19 @@ export default class Board extends React.Component {
 
   startLifeCycle = (speed) => {
     let counter = 0;
-    this.lifeCyclePID = setInterval(() => {
-      console.log(counter);
-      counter++;
-    }, speed);
+    // prevents previous PID's from being overwritten if user spam clicks 'start'
+    if (this.lifeCyclePID === null) {
+      this.lifeCyclePID = setInterval(() => {
+        console.log(counter);
+        counter++;
+      }, speed);
+    }
   }
 
   endLifeCycle = () => {
     clearInterval(this.lifeCyclePID);
+    // clear the PID after usage
+    this.lifeCyclePID = null;
   }
 
   render() {
