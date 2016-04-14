@@ -57,7 +57,7 @@ export default class Board extends React.Component {
   render() {
     const board = this.populateBoardWithCells(this.props.size);
     return (
-      <div className={"board board-" + this.props.size}>
+      <div className={'board board-' + this.props.size}>
         {
           board
         }
