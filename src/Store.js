@@ -38,12 +38,10 @@ class Store extends EventEmitter {
         break;
       }
       case 'START': {
-        console.log('recieved the start action');
         this.startLifeCycle();
         break;
       }
       case 'STOP': {
-        console.log('recieved the stop action');
         this.endLifeCycle();
         break;
       }

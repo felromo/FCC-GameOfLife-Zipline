@@ -26,7 +26,6 @@ export default class Board extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('we are inside the compomentWillReceiveProps function');
     // check if cycle is running
     if (this.lifeCyclePID != null) {
       this.endLifeCycle();
@@ -87,8 +86,6 @@ export default class Board extends React.Component {
     // prevents previous PID's from being overwritten if user spam clicks 'start'
     if (this.lifeCyclePID === null) {
       this.lifeCyclePID = setInterval(() => {
-        /* console.log(counter);
-           counter++; */
         console.log('running at speed: ', speed);
         this.checkForLife();
       }, speed);
