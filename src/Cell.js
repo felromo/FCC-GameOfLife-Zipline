@@ -10,6 +10,7 @@ export default class Cell extends React.Component {
   clickHandler(e) {
     const cellCoordinates = $(e.target).attr('id');
     Actions.cellActivate(cellCoordinates);
+    $(e.target).addClass('alive');
   }
 
   render() {
@@ -18,3 +19,7 @@ export default class Cell extends React.Component {
     );
   }
 }
+
+Cell.defaultProps = {
+  currentState: 'dead'
+};

@@ -2,6 +2,7 @@ $tmp-background-color: #808080;
 $board-background-color: #fff;
 $cell-background-color: #000;
 $cell-border-color: #808080;
+$cell-alive-color: #fff;
 $cell-height: 10px;
 $cell-width: 10px;
 
@@ -37,5 +38,9 @@ body {
   height: $cell-height;
   margin: 0;
   width: $cell-width;
+
+  &.alive {
+    background: $cell-alive-color;
+  }
 }
 
