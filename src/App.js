@@ -10,7 +10,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       size: Store.getSize(),
-      running: Store.isRunning()
+      running: Store.isRunning(),
+      speed: 1000
     };
   }
 
@@ -30,17 +31,39 @@ export default class App extends React.Component {
   handleClickStart = () => {
     Actions.start();
   }
+
   handleClickStop = () => {
     Actions.stop();
+  }
+
+  handleClickSpeed = (e) => {
+    let speed;
+    switch ($(e.target).text()) {
+        case 'slow':
+        speed = 1500;
+        break;
+        case 'normal':
+        speed = 1000;
+        break;
+        case 'fast':
+        speed = 500;
+        break;
+    }
+    this.setState({
+      speed: speed
+    });
   }
 
   render() {
     return (
       <div>
-        <Board size={this.state.size} running={this.state.running} speed={this.state.size} />
+        <Board size={this.state.size} running={this.state.running} speed={this.state.speed} />
         <button onClick={this.handleClick}>small</button>
         <button onClick={this.handleClick}>medium</button>
         <button onClick={this.handleClick}>large</button>
+        <button onClick={this.handleClickSpeed}>slow</button>
+        <button onClick={this.handleClickSpeed}>normal</button>
+        <button onClick={this.handleClickSpeed}>fast</button>
         <button onClick={this.handleClickStart}>Start</button>
         <button onClick={this.handleClickStop}>Stop</button>
       </div>

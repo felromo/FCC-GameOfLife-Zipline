@@ -6,8 +6,7 @@ export default class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      size: this.props.size,
-      speed: this.props.speed
+      size: this.props.size
     };
     this.lifeCyclePID = null;
   }
@@ -15,7 +14,7 @@ export default class Board extends React.Component {
   componentWillMount() {
     // store listeners 
     Store.on('start', () => {
-      this.startLifeCycle(1000);
+      this.startLifeCycle(this.props.speed);
     });
     Store.on('end', () => {
       this.endLifeCycle();
@@ -23,7 +22,16 @@ export default class Board extends React.Component {
   }
 
   componentDidMount() {
-    this.startLifeCycle(1000);
+    this.startLifeCycle(this.props.speed);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('we are inside the compomentWillReceiveProps function');
+    // check if cycle is running
+    if (this.lifeCyclePID != null) {
+      this.endLifeCycle();
+      this.startLifeCycle(nextProps.speed);
+    } 
   }
 
   populateBoardWithCells(size) {
@@ -81,6 +89,7 @@ export default class Board extends React.Component {
       this.lifeCyclePID = setInterval(() => {
         /* console.log(counter);
            counter++; */
+        console.log('running at speed: ', speed);
         this.checkForLife();
       }, speed);
     }
@@ -106,5 +115,5 @@ export default class Board extends React.Component {
 
 Board.defaultProps = {
   size: 'medium',
-  speed: 'medium'
+  speed: 1000
 };
