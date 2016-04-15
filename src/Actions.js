@@ -18,3 +18,10 @@ export function stop() {
     type: 'STOP'
   });
 }
+
+export function cellActivate(cellCoordinates) {
+  dispatcher.dispatch({
+    type: 'CELL_ACTIVATE',
+    data: cellCoordinates
+  });
+}

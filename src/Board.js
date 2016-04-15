@@ -20,6 +20,9 @@ export default class Board extends React.Component {
     Store.on('end', () => {
       this.endLifeCycle();
     });
+    Store.on('cell-activate', () => {
+      this.cellActivate();
+    });
   }
 
   componentDidMount() {
@@ -64,7 +67,10 @@ export default class Board extends React.Component {
     for (let x = 0; x < across; x++) {
       board.push([]);
       for (let y = 0; y < down; y++) {
-        board[x].push(<Cell id={ x+ ',' +y }/>);
+        board[x].push({
+          cell: <Cell id={ x+ ',' +y }/>,
+          state: 'dead'
+        });
       }
     }
     return board;
@@ -80,6 +86,12 @@ export default class Board extends React.Component {
       case 'large':
         break;
     }
+  }
+
+  cellActivate() {
+    const coords = Store.getActiveCellCoordinates().split(',').map(Number);
+    this.board[coords[0]][coords[1]].state = 'alive';
+    console.log(this.board);
   }
 
   checkForLife = () => {
@@ -104,10 +116,15 @@ export default class Board extends React.Component {
   }
 
   render() {
+    console.log(this.board);
     return (
       <div className={'board board-' + this.props.size}>
         {
-          this.board
+          this.board.map((value) => {
+            return value.map((value) => {
+              return value.cell;
+            });
+          })
         }
       </div>
     );
