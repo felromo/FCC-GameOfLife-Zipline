@@ -9,6 +9,7 @@ export default class Board extends React.Component {
       size: this.props.size
     };
     this.lifeCyclePID = null;
+    this.board = this.populateBoardWithCells(this.props.size);
   }
 
   componentWillMount() {
@@ -31,6 +32,10 @@ export default class Board extends React.Component {
       this.endLifeCycle();
       this.startLifeCycle(nextProps.speed);
     } 
+    // only repopulate board if needed
+    if (this.props.size !== nextProps.size) {
+      this.board = this.populateBoardWithCells(nextProps.size);
+    }
   }
 
   populateBoardWithCells(size) {
@@ -99,11 +104,10 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const board = this.populateBoardWithCells(this.props.size);
     return (
       <div className={'board board-' + this.props.size}>
         {
-          board
+          this.board
         }
       </div>
     );
