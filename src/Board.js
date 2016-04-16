@@ -97,7 +97,14 @@ export default class Board extends React.Component {
 
   checkForLife = () => {
     console.log('I am checking for life');
-    console.log(this.checkAlive([0,0]));
+    /* console.log(this.checkAlive([0,0])); */
+    // need a way to loop through board and check every active cell
+    this.board.forEach((value, x) => {
+      value.map((value2, y) => {
+        if (value2.state == 'alive')
+          console.log(x + ',' + y + ':' + this.checkAlive([x,y]));
+      });
+    });
   }
 
   checkAlive(origin) {
@@ -108,17 +115,17 @@ export default class Board extends React.Component {
     // now the tests
     if ((y!=0 && x!=0) && this.board[x-1][y-1].state == 'alive') // top left cell
       totalAlive++;
-    if ((x!=0) && this.board[x][y-1].state == 'alive') // top middle cell
+    if ((y!=0) && this.board[x][y-1].state == 'alive') // top middle cell
       totalAlive++;
-    if ((x!=0 && y!=this.board[0].length-1) && this.board[x+1][y-1].state == 'alive') // top right cell
+    if ((x!=0 && y!=this.board[0].length-1) && this.board[x-1][y+1].state == 'alive') // top right cell
       totalAlive++;
-    if ((y!=0) && this.board[x-1][y].state == 'alive') // middle left cell
+    if ((x!=0) && this.board[x-1][y].state == 'alive') // middle left cell
       totalAlive++;
-    if ((y!=this.board[0].length-1) && this.board[x+1][y].state == 'alive') // middle right cell
+    if ((y!=this.board[0].length-1) && this.board[x][y+1].state == 'alive') // middle right cell
       totalAlive++;
-    if ((x!=this.board.length-1 && y!=0) && this.board[x-1][y+1].state == 'alive') // bottom left cell
+    if ((x!=this.board.length-1 && y!=0) && this.board[x+1][y-1].state == 'alive') // bottom left cell
       totalAlive++;
-    if ((x!=this.board.length-1) && this.board[x][y+1].state == 'alive') // bottom middle cell
+    if ((x!=this.board.length-1) && this.board[x+1][y].state == 'alive') // bottom middle cell
       totalAlive++;
     if ((x!=this.board.length-1 && y!=this.board[0].length-1) && this.board[x+1][y+1].state == 'alive') // bottom right cell
       totalAlive++;
