@@ -95,14 +95,32 @@ export default class Board extends React.Component {
     console.log(coords);
   }
 
+  cellBorn(x, y) {
+    this.board[x][y].state = 'alive';
+  }
+
+  cellDied(x, y) {
+    this.board[x][y].state = 'dead';
+  }
+
   checkForLife = () => {
     console.log('I am checking for life');
     /* console.log(this.checkAlive([0,0])); */
     // need a way to loop through board and check every active cell
     this.board.forEach((value, x) => {
       value.map((value2, y) => {
-        if (value2.state == 'alive')
+        if (value2.state == 'alive') {
+          // here is where we need to run the rules of life
           console.log(x + ',' + y + ':' + this.checkAlive([x,y]));
+          console.log(this.board[x][y].state);
+          let surroundingAlive = this.checkAlive([x,y]);
+          if (surroundingAlive < 2) this.cellDied(x, y);
+          else if (surroundingAlive == 2 || surroundingAlive == 3) {} // might not even be necessary
+          else if (surroundingAlive > 3) this.cellDied(x, y);
+        } else if (value2.state == 'dead') {
+          let surroundingAlive = this.checkAlive([x,y]);
+          if (surroundingAlive == 3) this.cellBorn(x, y);
+        }
       });
     });
   }
