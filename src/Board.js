@@ -1,6 +1,8 @@
 import React from 'react';
 import Cell from './Cell';
 import Store from './Store';
+import * as Actions from './Actions';
+import $ from 'jquery';
 
 export default class Board extends React.Component {
   constructor(props) {
@@ -68,7 +70,7 @@ export default class Board extends React.Component {
       board.push([]);
       for (let y = 0; y < down; y++) {
         board[x].push({
-          cell: <Cell id={ x+ ',' +y } />,
+          cell: <Cell id={ x+ ',' +y } cellState='dead'/>,
           state: 'dead'
         });
       }
@@ -95,8 +97,10 @@ export default class Board extends React.Component {
     console.log(coords);
   }
 
-  cellBorn(x, y) {
-    this.board[x][y].state = 'alive';
+  cellBorn = (x, y) => {
+    //this.board[x][y].state = 'alive';
+    Actions.cellActivate(x+','+ y);
+    $('#'+x+'\\,'+y).addClass('alive');
   }
 
   cellDied(x, y) {
