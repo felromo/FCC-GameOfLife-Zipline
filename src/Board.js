@@ -29,7 +29,7 @@ export default class Board extends React.Component {
     Store.on('clear-board', () => {
       console.log('log received clear command');
       debugger;
-      this.board = this.populateBoardWithCells(this.state.size);
+      this.board = this.populateBoardWithCells(this.props.size);
       $('.cell').removeClass('alive');
     });
   }
