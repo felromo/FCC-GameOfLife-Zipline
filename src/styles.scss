@@ -42,5 +42,8 @@ body {
   &.alive {
     background: $cell-alive-color;
   }
+  &.died {
+    background: pink;
+  }
 }
 

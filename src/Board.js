@@ -98,58 +98,81 @@ export default class Board extends React.Component {
   }
 
   cellBorn = (x, y) => {
-    //this.board[x][y].state = 'alive';
-    Actions.cellActivate(x+','+ y);
+    this.board[x][y].state = 'alive';
+    /* Actions.cellActivate(x+','+ y); */
     $('#'+x+'\\,'+y).addClass('alive');
   }
 
-  cellDied(x, y) {
+  cellDied = (x, y) => {
     this.board[x][y].state = 'dead';
+    $('#'+x+'\\,'+y).removeClass('alive');
+    /* $('#'+x+'\\,'+y).addClass('died'); */
+  }
+
+  postActions = (cellAction) => {
+    let [x,y] = cellAction.coords;
+    switch(cellAction.state) {
+      case 'alive':
+        this.cellBorn(x, y);
+        break;
+      case 'dead':
+        this.cellDied(x, y);
+        break;
+    }
   }
 
   checkForLife = () => {
     console.log('I am checking for life');
+    const board = this.board.slice();
+    let cellActions = [];
     /* console.log(this.checkAlive([0,0])); */
     // need a way to loop through board and check every active cell
-    this.board.forEach((value, x) => {
-      value.map((value2, y) => {
+    board.forEach((value, row) => {
+      value.map((value2, col) => {
         if (value2.state == 'alive') {
           // here is where we need to run the rules of life
-          console.log(x + ',' + y + ':' + this.checkAlive([x,y]));
-          console.log(this.board[x][y].state);
-          let surroundingAlive = this.checkAlive([x,y]);
-          if (surroundingAlive < 2) this.cellDied(x, y);
-          else if (surroundingAlive == 2 || surroundingAlive == 3) {} // might not even be necessary
-          else if (surroundingAlive > 3) this.cellDied(x, y);
+          console.log(row + ',' + col + ':' + this.checkAlive([row,col], board));
+          console.log(this.board[row][col].state);
+          let surroundingAlive = this.checkAlive([row,col], board);
+          /* if (surroundingAlive < 2) this.cellDied(row, col, board); */
+          if (surroundingAlive < 2) cellActions.push({coords: [row, col], state: 'dead'});
+          /* else if (surroundingAlive > 3) this.cellDied(row, col, board); */
+          else if (surroundingAlive > 3) cellActions.push({coords: [row, col], state: 'dead'});
+          else if (surroundingAlive == 2 || surroundingAlive == 3) cellActions.push({coords: [row, col], state: 'alive'});
         } else if (value2.state == 'dead') {
-          let surroundingAlive = this.checkAlive([x,y]);
-          if (surroundingAlive == 3) this.cellBorn(x, y);
+          let surroundingAlive = this.checkAlive([row,col], board);
+          /* if (surroundingAlive == 3) this.cellBorn(row, col, board); */
+          if (surroundingAlive == 3) cellActions.push({coords: [row, col], state: 'alive'});
         }
       });
     });
+    if(cellActions.length > 0)
+      cellActions.forEach((cellAction) => {
+        this.postActions(cellAction);
+      });
   }
 
-  checkAlive(origin) {
+  checkAlive(origin, board) {
     // this function takes the coordinates in array form of a cell and treats it as the origin, and checks the surrounding 8 blocks for life and returns the total ammount of life
     let totalAlive = 0;
     // destructur origin for easier usage
-    const [x, y] = origin;
+    const [row, col] = origin;
     // now the tests
-    if ((y!=0 && x!=0) && this.board[x-1][y-1].state == 'alive') // top left cell
+    if ((col!=0 && row!=0) && board[row-1][col-1].state == 'alive') // top left cell
       totalAlive++;
-    if ((y!=0) && this.board[x][y-1].state == 'alive') // top middle cell
+    if ((col!=0) && board[row][col-1].state == 'alive') // top middle cell
       totalAlive++;
-    if ((x!=0 && y!=this.board[0].length-1) && this.board[x-1][y+1].state == 'alive') // top right cell
+    if ((row!=0 && col!=board[0].length-1) && board[row-1][col+1].state == 'alive') // top right cell
       totalAlive++;
-    if ((x!=0) && this.board[x-1][y].state == 'alive') // middle left cell
+    if ((row!=0) && board[row-1][col].state == 'alive') // middle left cell
       totalAlive++;
-    if ((y!=this.board[0].length-1) && this.board[x][y+1].state == 'alive') // middle right cell
+    if ((col!=board[0].length-1) && board[row][col+1].state == 'alive') // middle right cell
       totalAlive++;
-    if ((x!=this.board.length-1 && y!=0) && this.board[x+1][y-1].state == 'alive') // bottom left cell
+    if ((row!=board.length-1 && col!=0) && board[row+1][col-1].state == 'alive') // bottom left cell
       totalAlive++;
-    if ((x!=this.board.length-1) && this.board[x+1][y].state == 'alive') // bottom middle cell
+    if ((row!=board.length-1) && board[row+1][col].state == 'alive') // bottom middle cell
       totalAlive++;
-    if ((x!=this.board.length-1 && y!=this.board[0].length-1) && this.board[x+1][y+1].state == 'alive') // bottom right cell
+    if ((row!=board.length-1 && col!=board[0].length-1) && board[row+1][col+1].state == 'alive') // bottom right cell
       totalAlive++;
     return totalAlive;
   }
