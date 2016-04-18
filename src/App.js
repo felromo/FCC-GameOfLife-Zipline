@@ -11,7 +11,7 @@ export default class App extends React.Component {
     this.state = {
       size: Store.getSize(),
       running: Store.isRunning(),
-      speed: 1000,
+      speed: 200,
       generations: Store.getGenerations()
     };
   }
@@ -46,13 +46,13 @@ export default class App extends React.Component {
     let speed;
     switch ($(e.target).text()) {
         case 'slow':
-        speed = 1500;
+        speed = 500;
         break;
         case 'normal':
-        speed = 1000;
+        speed = 200;
         break;
         case 'fast':
-        speed = 500;
+        speed = 100;
         break;
     }
     this.setState({

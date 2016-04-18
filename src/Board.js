@@ -219,5 +219,5 @@ export default class Board extends React.Component {
 
 Board.defaultProps = {
   size: 'medium',
-  speed: 1000
+  speed: 200
 };
