@@ -62,6 +62,7 @@ export default class App extends React.Component {
 
   handleClickClear = () => {
     console.log('I clear the board');
+    Actions.clearBoard();
   }
 
   render() {

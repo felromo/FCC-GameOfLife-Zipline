@@ -69,6 +69,13 @@ class Store extends EventEmitter {
         this.emit('gen-up');
         break;
       }
+      case 'CLEAR': {
+        console.log('clearing-store');
+        this.generations = 0;
+        this.emit('clear-board');
+        this.emit('gen-up');
+        break;
+      }
     }
   }
 }

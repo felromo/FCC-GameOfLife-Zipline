@@ -31,3 +31,9 @@ export function genUp() {
     type: 'GEN_UP'
   });
 }
+
+export function clearBoard() {
+  dispatcher.dispatch({
+    type: 'CLEAR'
+  });
+}

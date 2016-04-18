@@ -25,6 +25,12 @@ export default class Board extends React.Component {
     Store.on('cell-activate', () => {
       this.cellActivate();
     });
+    Store.on('clear-board', () => {
+      console.log('log received clear command');
+      debugger;
+      this.board = this.populateBoardWithCells(this.state.size);
+      $('.cell').removeClass('alive');
+    });
   }
 
   componentDidMount() {
