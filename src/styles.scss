@@ -1,18 +1,31 @@
-$tmp-background-color: #808080;
-$board-background-color: #fff;
-$cell-background-color: #000;
-$cell-border-color: #808080;
-$cell-alive-color: #fff;
-$cell-height: 10px;
-$cell-width: 10px;
+$body-background-color: black;
+$font-color: white;
+$board-background-color: #bbb5b4;
+$cell-background-color: white;
+$cell-border-color: grey;
+$cell-alive-color: black;
+$cell-height: 15px;
+$cell-width: 15px;
 
 
 body {
-  background: $tmp-background-color;
+  background: $body-background-color;
+  color: $font-color;
+}
+
+.generations {
+
+  text-align: center;
 }
 
 .board {
+  margin: 0 auto;
   background: $board-background-color;
+}
+
+.menu {
+  margin-top: 10px;
+  text-align: center;
 }
 
 .board-small {

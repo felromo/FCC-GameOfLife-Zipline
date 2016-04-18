@@ -68,17 +68,19 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Generations: {this.state.generations}</h2>
+        <h2 className="generations">Generations: {this.state.generations}</h2>
         <Board size={this.state.size} running={this.state.running} speed={this.state.speed} />
-        <button onClick={this.handleClick}>small</button>
-        <button onClick={this.handleClick}>medium</button>
-        <button onClick={this.handleClick}>large</button>
-        <button onClick={this.handleClickSpeed}>slow</button>
-        <button onClick={this.handleClickSpeed}>normal</button>
-        <button onClick={this.handleClickSpeed}>fast</button>
-        <button onClick={this.handleClickStart}>Start</button>
-        <button onClick={this.handleClickStop}>Stop</button>
-        <button onClick={this.handleClickClear}>Clear</button>
+        <div className="menu">
+          <button onClick={this.handleClick}>small</button>
+          <button onClick={this.handleClick}>medium</button>
+          <button onClick={this.handleClick}>large</button>
+          <button onClick={this.handleClickSpeed}>slow</button>
+          <button onClick={this.handleClickSpeed}>normal</button>
+          <button onClick={this.handleClickSpeed}>fast</button>
+          <button onClick={this.handleClickStart}>Start</button>
+          <button onClick={this.handleClickStop}>Stop</button>
+          <button onClick={this.handleClickClear}>Clear</button>
+        </div>
       </div>
     );
   }
