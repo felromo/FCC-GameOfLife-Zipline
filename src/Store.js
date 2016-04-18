@@ -7,6 +7,7 @@ class Store extends EventEmitter {
     this.size = 'medium';
     this.running = true;
     this.currentCellCoordinates = null;
+    this.generations = 0;
   }
 
   changeSize(size) {
@@ -37,6 +38,10 @@ class Store extends EventEmitter {
     this.emit('cell-activate');
   }
 
+  getGenerations() {
+    return this.generations;
+  }
+
   getActiveCellCoordinates() {
     return this.currentCellCoordinates;
   }
@@ -57,6 +62,11 @@ class Store extends EventEmitter {
       }
       case 'CELL_ACTIVATE': {
         this.cellActivate(action.data);
+        break;
+      }
+      case 'GEN_UP': {
+        this.generations++;
+        this.emit('gen-up');
         break;
       }
     }

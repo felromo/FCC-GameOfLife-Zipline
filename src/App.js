@@ -11,7 +11,8 @@ export default class App extends React.Component {
     this.state = {
       size: Store.getSize(),
       running: Store.isRunning(),
-      speed: 1000
+      speed: 1000,
+      generations: Store.getGenerations()
     };
   }
 
@@ -19,6 +20,11 @@ export default class App extends React.Component {
     Store.on('change-size', () => {
       this.setState({
         size: Store.getSize()
+      });
+    });
+    Store.on('gen-up', () => {
+      this.setState({
+        generations: Store.getGenerations()
       });
     });
   }
@@ -61,7 +67,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <h2>Generations: 0</h2>
+        <h2>Generations: {this.state.generations}</h2>
         <Board size={this.state.size} running={this.state.running} speed={this.state.speed} />
         <button onClick={this.handleClick}>small</button>
         <button onClick={this.handleClick}>medium</button>

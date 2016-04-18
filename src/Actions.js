@@ -25,3 +25,9 @@ export function cellActivate(cellCoordinates) {
     data: cellCoordinates
   });
 }
+
+export function genUp() {
+  dispatcher.dispatch({
+    type: 'GEN_UP'
+  });
+}

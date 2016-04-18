@@ -150,6 +150,7 @@ export default class Board extends React.Component {
       cellActions.forEach((cellAction) => {
         this.postActions(cellAction);
       });
+    Actions.genUp();
   }
 
   checkAlive(origin, board) {
