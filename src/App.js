@@ -61,6 +61,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+        <h2>Generations: 0</h2>
         <Board size={this.state.size} running={this.state.running} speed={this.state.speed} />
         <button onClick={this.handleClick}>small</button>
         <button onClick={this.handleClick}>medium</button>
