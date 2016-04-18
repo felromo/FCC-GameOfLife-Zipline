@@ -54,6 +54,10 @@ export default class App extends React.Component {
     });
   }
 
+  handleClickClear = () => {
+    console.log('I clear the board');
+  }
+
   render() {
     return (
       <div>
@@ -66,6 +70,7 @@ export default class App extends React.Component {
         <button onClick={this.handleClickSpeed}>fast</button>
         <button onClick={this.handleClickStart}>Start</button>
         <button onClick={this.handleClickStop}>Stop</button>
+        <button onClick={this.handleClickClear}>Clear</button>
       </div>
     );
   }
