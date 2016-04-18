@@ -17,5 +17,6 @@
   },
   "plugins": [
     "react"
-  ]
+  ],
+  "extends": ["eslint:recommend", "plugin:react/recommended"]
 }
