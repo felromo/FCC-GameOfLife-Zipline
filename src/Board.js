@@ -12,6 +12,7 @@ export default class Board extends React.Component {
     };
     this.lifeCyclePID = null;
     this.board = this.populateBoardWithCells(this.props.size);
+    this.cellRandomizer();
   }
 
   componentWillMount() {
@@ -47,6 +48,22 @@ export default class Board extends React.Component {
     if (this.props.size !== nextProps.size) {
       this.board = this.populateBoardWithCells(nextProps.size);
     }
+  }
+
+  cellRandomizer() {
+    const min = 0;
+    const max = 4;
+
+    this.board.forEach((value, x) => {
+      value.forEach((value2, y) => {
+        let chanceForLife = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (chanceForLife > 2) {
+          value2.state = 'alive';
+          $('#'+x+'\\,'+y).addClass('alive');
+        }
+      });
+    });
+
   }
 
   populateBoardWithCells(size) {
